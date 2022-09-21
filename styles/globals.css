@@ -38,7 +38,11 @@ span,
 input,
 option,
 select,
-button,
+/* button, */
 label {
   font-size: 1rem;
+}
+
+button {
+  font-size: 2rem;
 }

@@ -1,37 +1,7 @@
 import Head from 'next/head'
 import { useReducer } from 'react';
-import { ColumnList } from '../widgets/ColumnList';
-import { v4 as uuid } from "uuid";
-
-const ACTION = {};
-
-const initialState = {
-  column: {
-    list: [
-      {
-        id: uuid(),
-        title: "Untitled",
-        cards: [
-          {
-            id: uuid(),
-            title: "Untitled"
-          },
-          {
-            id: uuid(),
-            title: "Untitled"
-          },
-        ]
-      }
-    ]
-  }
-};
-
-const rootReducer = (state, action) => {
-  switch (action.type){
-    default:
-      throw Error(`unkown action.type ${action.type}`);
-  }
-}; 
+import { rootReducer, initialState } from '../store';
+import { Board } from '../widgets/Board';
 
 export default function Home() {
   
@@ -44,8 +14,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
    
-      <ColumnList 
-        columns={state.column.list}
+      <Board
+        board={state.board.list[0]}
+        dispatch={dispatch}
       />
    
     </div>

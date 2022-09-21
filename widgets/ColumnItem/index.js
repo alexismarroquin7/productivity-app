@@ -1,27 +1,47 @@
-export const ColumnItem = ({ cards = [], title = "" }) => {
+import { Action } from "../../store";
+import { CardList } from "../CardList";
+
+export const ColumnItem = ({ board_id, column = {}, dispatch }) => {
+  
+  const handleCreateCard = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch(Action.createCard({
+      board: { id: board_id },
+      column: { id: column.id },
+    }))
+  }
+
   return (
     <div
       className="column_item"
     >
 
-      <p>{title}</p>
+      <h3>{column.title}</h3>
 
-      {cards.length > 0 && <CardList cards={cards} />}
+      {column.cards.length > 0 && <CardList cards={column.cards} />}
 
       <button
-      
         className="create-column-card"
-      >+ Card</button>
+        onPointerDown={handleCreateCard}
+      >+</button>
       
       <style jsx>{`
       
-        .column_list {
+        .column_item {
+          width: 30rem;
           display: flex;
           flex-flow: column wrap;
-        }
-
-        .create-column-card {
+          border: 1px solid black;
           padding: 1rem;
+        }
+        
+        .create-column-card {
+          width: 100%;
+          display: flex;
+          padding: .5rem;
+          align-items: center;
+          /* font-size: 2rem; */
         }
       
       `}</style>
